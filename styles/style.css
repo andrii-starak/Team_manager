@@ -1,15 +1,35 @@
 * {
-    border: 1px solid rgb(73, 73, 73);
+    /* border: 1px solid rgb(73, 73, 73); */
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* colors */
 :root {
-    --primary-blue: #85B0FF;
-    --primary-green: #4cd37b;
-    --primary-white: #fff;
+    --primary-blue: rgb(119, 137, 255);
+    --secondary-blue: rgb(133, 167, 236);
+    --primary-red: rgb(255, 98, 73);
+    --secondary-red: rgb(253, 173, 81);
+    --primary-green: rgb(126, 253, 98);
+    --secondary-green: rgb(143, 255, 158);
+    --primary-white: 255, 255, 255;
     --primary-black: #000;
-
-    --padding-text:
+    /* --padding-text:; */
+    --border-s: 5px;
+    --border-m: 10px;
+    --border-l: 25px;
+    --font-400: 400 1em 'Roboto', "Helvetica",
+        sans-serif;
+    --font-700: 700 1em 'Roboto',
+        "Helvetica",
+        sans-serif;
+    --font-900: 900 2em 'Roboto',
+        "Helvetica",
+        sans-serif;
 }
 
 /* colors end */
@@ -18,6 +38,18 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font
+}
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-red));
+    background-image: url(/picures/body/pexels-photo-3448250.jpeg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 .container {
@@ -25,51 +57,84 @@ body {
     max-width: 1200px;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    background: linear-gradient(45deg, rgb(163, 218, 255), rgb(213, 255, 175));
-}
-
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100px;
+    background-color: rgba(var(--primary-white), 0.1);
+    backdrop-filter: blur(3px);
+    border-radius: 10px;
+    padding: .25em;
+}
+
+.logo {
+    filter: drop-shadow(0 -7px 1px var(--secondary-red));
+}
+
+.logo img {
+    filter: none;
+    transition: all .75s ease;
+}
+
+.logo:hover img {
+    filter: drop-shadow(0 -7px 1px var(--primary-red));
 }
 
 header>a {
     height: 100%;
 }
 
+h1 {
+    font: var(--font-900);
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    filter: drop-shadow(3px -4px 1px var(--secondary-red));
+    transition: all .5s ease;
+}
+
+h1:hover {
+    color: var(--secondary-red);
+    filter: drop-shadow(3px -2px 1px var(--primary-red));
+}
+
 .container_nav {
     width: 30%;
     height: 100%;
-    /* flex-grow: 1; */
-    align-items: stretch;
 }
 
 .container_ul {
     list-style: none;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 100%;
     align-items: center;
-    min-width: cont;
+    gap: .5em;
+    margin-right: .5em;
 }
 
 .container_ul li {
-    /* background-color: #fff; */
     padding: .5rem;
-    height: 100%;
+    height: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 1;
+    background: linear-gradient(135deg, rgba(var(--primary-white), 0.2), var(--primary-green), rgba(var(--primary-white), 0.2));
+    border-radius: var(--border-m);
+    border: none;
+    filter: drop-shadow(0px 0px 7px var(--primary-white));
+    transition: all .3s ease;
+}
+
+.container_ul li:hover {
+    scale: .9;
+    background: linear-gradient(45deg, var(--primary-red), var(--secondary-red), var(--primary-red));
 }
 
 /* Body */
+/*  */
+/*  */
 .container_main {
     margin: 4rem 1rem;
     display: grid;
@@ -87,37 +152,55 @@ header>a {
     justify-content: center;
     align-items: center;
     position: relative;
-    z-index: 2;
-    box-shadow: 0px 10px 13px -7px #000000, 7px 5px 5px 0px rgba(0, 0, 0, 0.2);
+    filter: drop-shadow(0 0 15px var(--primary-black));
+    border-radius: var(--border-s);
 }
 
-.main_content::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url(/picures/main/ball.jpg);
-    background-repeat: round;
-    filter: blur(2px) grayscale(90%) opacity(90%);
-    z-index: -1;
-}
-
-.main_content>a:hover {
-    background-image: url(/picures/main/ball.jpg);
-    background-repeat: round;
-    filter: none;
-
-}
-
-.main_content>a {
-    display: inline-block;
-    width: 100%;
-    line-height: 200px;
+.main_content--link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    width: 100%;
+    transition: all .5s ease-in-out;
 }
 
+.main_content--img {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(2px) grayscale(90%) opacity(90%);
+    transition: all .5s ease-in-out;
+    border-radius: var(--border-s);
+}
+
+.main_content--text {
+    display: inline-block;
+    position: absolute;
+    z-index: 2;
+    background-color: rgba(var(--primary-white), 0.1);
+    border-radius: 2px;
+    transition: all .5s ease-in-out;
+}
+
+.main_content--link:hover .main_content--text {
+    background-color: rgba(var(--primary-white), .9);
+    border-radius: 2px;
+    letter-spacing: .3em;
+}
+
+.main_content--link:hover,
+.main_content--img:hover {
+    filter: none;
+    transform: scale(1.1);
+}
+
+.main_content--link:hover .main_content--img {
+    transform: scale(1);
+}
 
 .manager {}
 
@@ -132,7 +215,8 @@ footer {
     flex-direction: column;
     justify-content: space-evenly;
     height: 5rem;
-    box-shadow: 4px 4px 5px 1px var(--primary-blue);
+    background-image: url(/picures/footer/stock-photo-panoramic-shot-green-grass-meadow.jfif);
+    filter: drop-shadow(0px 0px 7px var(--primary-green));
 }
 
 h3 {
@@ -142,4 +226,15 @@ h3 {
 .footer_info {
     display: flex;
     justify-content: space-around;
+}
+
+.footer_info li {
+    background-color: rgb(var(--primary-white), .4);
+    border-radius: 5px;
+    transition: all .3s ease;
+}
+
+.footer_info li:hover {
+    filter: drop-shadow(0px 0px 10px var(--secondary-red));
+    background: linear-gradient(45deg, var(--primary-red), var(--secondary-red), var(--primary-red));
 }
