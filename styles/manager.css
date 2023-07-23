@@ -1,0 +1,30 @@
+@import "style.css";
+
+.player_input {
+    width: 50%;
+    padding: 2em;
+    border-radius: 5px;
+    background-color: lightgreen;
+    box-shadow: 4px 5px 5px rgb(104, 225, 93);
+}
+
+.input--header {
+    display: flex;
+    justify-content: space-around;
+}
+
+.input--header input {
+    justify-self: flex-start;
+}
+
+.add_player {}
+
+.player_table {}
+
+.player_row {
+    background-color: var(--);
+}
+
+.activated {
+    background-color: green;
+}

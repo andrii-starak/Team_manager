@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/nullifier.css">
+    <!-- <link rel="stylesheet" href="/styles/normalize.css"> -->
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/manager.css">
+    <title>Team manager</title>
+</head>
+
+<body>
+    <div class="player_input">
+        <div class="input--header">
+            <label for="player-name">Гравець</label>
+            <input type="text" id="player-name" name="player-name" minlength="1" maxlength="30" size="10"
+                placeholder="Прізвище і імя">
+            <button class="add add_player" type="submit">Додати гравця</button>
+            <button class="add add_guest" type="submit">Додати гравця і гостя</button>
+        </div>
+        <hr>
+        <div class="player_table">
+            <p class="player_row">Плесак Степан</p>
+            <p class="player_row">Плесак Міша</p>
+        </div>
+    </div>
+</body>
+<script src="/manager.js"></script>
+
+</html>

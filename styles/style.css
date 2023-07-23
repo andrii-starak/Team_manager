@@ -81,7 +81,7 @@ header {
     filter: drop-shadow(0 -7px 1px var(--primary-red));
 }
 
-header>a {
+header > a {
     height: 100%;
 }
 
