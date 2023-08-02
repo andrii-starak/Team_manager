@@ -1,7 +1,7 @@
 @import "style.css";
 
 .player_input {
-    width: 50%;
+    width: 60%;
     padding: 2em;
     border-radius: 5px;
     background-color: lightgreen;
@@ -11,10 +11,30 @@
 .input--header {
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 .input--header input {
     justify-self: flex-start;
+    width: 12rem;
+    padding: .5rem;
+    border: 1px solid var(--secondary-blue);
+    border-radius: 5px;
+}
+
+
+
+.input--header label {
+    margin-right: 1rem;
+}
+
+.input--header-left {
+    margin-right: auto;
+}
+
+.input--header-center {
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .add_player {}

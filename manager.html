@@ -18,18 +18,17 @@
     <div class="player_input">
         <div class="input--header">
             <label for="player-name">Гравець</label>
-            <input type="text" id="player-name" name="player-name" minlength="1" maxlength="30" size="10"
-                placeholder="Прізвище і імя">
-            <button class="add add_player" type="submit">Додати гравця</button>
-            <button class="add add_guest" type="submit">Додати гравця і гостя</button>
+            <input class="input--header-left player-name" type="text" id="player-name" name="player-name" minlength="1"
+                maxlength="30" size="10" placeholder="Прізвище і імя">
+            <button class="add add_player input--header-center" type="submit">Додати гравця</button>
+            <button class="add add_guest input--header-center" type="submit">Додати гравця і гостя</button>
+            <button class="add add_guest input--header-center" type="submit">Відмінити голос</button>
         </div>
         <hr>
         <div class="player_table">
-            <p class="player_row">Плесак Степан</p>
-            <p class="player_row">Плесак Міша</p>
         </div>
     </div>
+    <script src="/manager.js"></script>
 </body>
-<script src="/manager.js"></script>
 
 </html>
