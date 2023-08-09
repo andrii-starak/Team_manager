@@ -1,7 +1,8 @@
 'use strict';
 document.addEventListener('DOMContentLoaded', () => {
   const addPlayerButton = document.querySelector('.add_player');
-  const guestButton = document.querySelector('.add_guest');
+  const addGuestButton = document.querySelector('.add_guest');
+  const deletePlayerButton = document.querySelector('.delete_guest');
   const playerTable = document.querySelector('.player_table');
   const inputPlayerName = document.querySelector('#player-name');
   const users = [];
@@ -9,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Logic
   //
+  deletePlayerButton.disabled = true;
 
   const capitalizer = function (string) {
     const words = string
@@ -18,24 +20,49 @@ document.addEventListener('DOMContentLoaded', () => {
     return capitalizedString;
   };
 
-  const addedPlayer = function () {
+  const disabler = function () {
+    addPlayerButton.disabled = true;
+    deletePlayerButton.disabled = false;
+  };
+
+  const addingPlayer = function () {
     let playerName = inputPlayerName.value;
-    if (!playerName) return;
+    if (!playerName || users.length > 14) return;
     else {
+      deletePlayerButton.disabled = false;
+
       playerName = capitalizer(playerName);
       console.log(playerName);
-
+      users.push(playerName);
       const createdPlayerRow = document.createElement('p');
-      createdPlayerRow.textContent = `${playerName}`;
+      createdPlayerRow.textContent = `${users.length}. ${playerName}`;
       playerTable.append(createdPlayerRow);
-
-      //   статус чи додавав цей користувач вже гравця
-      playerAddedStatus = !playerAddedStatus;
-      addPlayerButton.disabled = true;
+      inputPlayerName.value = '';
+      disabler();
+      if (users.length == 14) {
+        disabler();
+        addGuestButton.disabled = true;
+      }
     }
   };
 
+  const deletingPlayer = function () {
+    const lastElementTable = playerTable.lastElementChild;
+    lastElementTable.remove();
+    addPlayerButton.disabled = false;
+  };
+
+  const addingGuest = function () {
+    addingPlayer();
+  };
+
   addPlayerButton.addEventListener('click', () => {
-    addedPlayer();
+    addingPlayer();
+  });
+
+  deletePlayerButton.addEventListener('click', () => deletingPlayer());
+
+  addGuestButton.addEventListener('click', () => {
+    addingGuest();
   });
 });
