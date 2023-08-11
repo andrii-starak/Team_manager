@@ -21,14 +21,13 @@
             <h1>Team manager</h1>
             <div class="container_nav">
                 <ul class="container_ul">
-                    <li><a href="#">Log In</a></li>
-                    <li><a href="#">Sign In</a></li>
+                    <li id="logInBtn"><a href="#">Log In</a></li>
+                    <li id="signIn"><a href="#">Sign In</a></li>
                     <li><a href="#">Guest</a></li>
                 </ul>
             </div>
         </header>
         <main class="container_main">
-
             <div class="main_content manager">
                 <a class="main_content--link" href="/manager.html">
                     <img class="main_content--img" src="/picures/main/ball.jpg" alt="ball_on_grass">
@@ -53,8 +52,16 @@
                     <p class="main_content--text">Suggestions</p>
                 </a>
             </div>
-
         </main>
+        <div class="modal-overlay hidden" id="modalOverlay">
+            <div class="modal">
+                <label for="login" class="input-label">Логін</label>
+                <input type="text" id="login" name="login" class="input-field">
+                <label for="password" class="input-label">Пароль</label>
+                <input type="password" id="password" name="password" class="input-field">
+                <button class="close-button" id="closeButton">Закрити</button>
+            </div>
+        </div>
         <footer>
             <h3>Contact us</h3>
             <ul class="footer_info">
@@ -64,6 +71,7 @@
             </ul>
         </footer>
     </div class="container">
+    <script src="/script.js"></script>
 </body>
 
 </html>

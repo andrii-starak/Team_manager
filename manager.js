@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputPlayerName = document.querySelector('#player-name');
   const users = [];
   let playerAddedStatus = false;
-
   // Logic
   //
   deletePlayerButton.disabled = true;
@@ -50,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lastElementTable = playerTable.lastElementChild;
     lastElementTable.remove();
     addPlayerButton.disabled = false;
+    users.pop();
   };
 
   const addingGuest = function () {
