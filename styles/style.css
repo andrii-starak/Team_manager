@@ -259,7 +259,7 @@ h3 {
 
 .modal {
     background-color: #e1f1e1;
-    width: 300px;
+    width: 400px;
     height: 300px;
     border-radius: 15px;
     display: flex;
@@ -289,7 +289,8 @@ h3 {
     margin-bottom: 15px;
 }
 
-.close-button {
+.close-button,
+.log-in-button {
     margin-top: 10px;
     background-color: #4caf50;
     color: white;
@@ -299,10 +300,34 @@ h3 {
     cursor: pointer;
 }
 
-.close-button:hover {
+.close-button:hover,
+.log-in-button:hover {
     background-color: #45a049;
 }
 
 .modal-overlay.active {
     display: flex;
+}
+
+.modal-btns {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    color: lightcoral
+}
+
+.home-container {
+    text-align: center;
+    font: var(--font-900);
+    color: #000;
+    background-color: rgba(211, 251, 211, 0.4);
+    border-radius: 7px;
+}
+
+.error-message {
+    text-align: center;
+    font: var(--font-400);
+    color: #000;
+    border-radius: 5px;
+    padding: .5em;
 }

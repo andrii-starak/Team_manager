@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       playerTable.append(createdPlayerRow);
       inputPlayerName.value = '';
       disabler();
-      if (users.length == 14) {
+      if (users.length == 3) {
         disabler();
         addGuestButton.disabled = true;
       }

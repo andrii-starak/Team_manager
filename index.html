@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div id="homeContainer" class="container">
         <header id="home">
             <a class="logo" href="#home"><img src="/picures/logo/6_549695108044292128_3_inv.svg" width="100"
                     height="100" alt="site_logo"></a>
@@ -56,10 +56,13 @@
         <div class="modal-overlay hidden" id="modalOverlay">
             <div class="modal">
                 <label for="login" class="input-label">Логін</label>
-                <input type="text" id="login" name="login" class="input-field">
+                <input type="text" id="logInInput" name="login" class="input-field">
                 <label for="password" class="input-label">Пароль</label>
-                <input type="password" id="password" name="password" class="input-field">
-                <button class="close-button" id="closeButton">Закрити</button>
+                <input type="password" id="logInPassword" name="password" class="input-field">
+                <div class="modal-btns">
+                    <button class="log-in-button" id="logInPlayer">Ввійти</button>
+                    <button class="close-button" id="closeButton">Закрити</button>
+                </div>
             </div>
         </div>
         <footer>
