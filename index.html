@@ -21,9 +21,7 @@
             <h1>Team manager</h1>
             <div class="container_nav">
                 <ul class="container_ul">
-                    <li id="logInBtn"><a href="#">Log In</a></li>
-                    <li id="signIn"><a href="#">Sign In</a></li>
-                    <li><a href="#">Guest</a></li>
+                    <li id="enterBtn"><a href="#">Вхід/Реєстрація</a></li>
                 </ul>
             </div>
         </header>
@@ -53,15 +51,17 @@
                 </a>
             </div>
         </main>
+
         <div class="modal-overlay hidden" id="modalOverlay">
-            <div class="modal">
+            <div class="modal" id="modalLogInWindow">
                 <label for="login" class="input-label">Логін</label>
-                <input type="text" id="logInInput" name="login" class="input-field">
+                <input type="text" id="loginInput" name="login" class="input-field">
                 <label for="password" class="input-label">Пароль</label>
-                <input type="password" id="logInPassword" name="password" class="input-field">
+                <input type="password" id="passwordInput" name="password" class="input-field">
                 <div class="modal-btns">
-                    <button class="log-in-button" id="logInPlayer">Ввійти</button>
-                    <button class="close-button" id="closeButton">Закрити</button>
+                    <button class="log-in-button" id="signInBtn">Зареєструватись</button>
+                    <button class="log-in-button" id="logInPlayerBtn">Ввійти</button>
+                    <button class="close-button" id="closeOverlayBtn">Закрити</button>
                 </div>
             </div>
         </div>

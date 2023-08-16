@@ -1,60 +1,88 @@
 'use strict';
 const header = document.querySelector('#homeContainer');
-const overlay = document.querySelector('#modalOverlay');
-const modal = document.querySelector('.modal');
-const logInBtn = document.querySelector('#logInBtn');
-const logInPlayer = document.querySelector('#logInPlayer');
-const signIn = document.querySelector('#signIn');
-const closeOverlayButton = document.querySelector('#closeButton');
-const loginInput = document.querySelector('#logInInput');
-const loginPass = document.querySelector('#logInPassword');
+const modalOverlay = document.querySelector('#modalOverlay');
+const modalLogInWindow = document.querySelector('#modalLogInWindow');
+// Buttons
+const enterBtn = document.querySelector('#enterBtn');
+const logInPlayerBtn = document.querySelector('#logInPlayerBtn');
+const signInBtn = document.querySelector('#signInBtn');
+const closeOverlayBtn = document.querySelector('#closeOverlayBtn');
+// Inputs
+const loginInput = document.querySelector('#loginInput');
+const passwordInput = document.querySelector('#passwordInput');
+// Logic
 const player1 = {
   playerName: 'Andrii',
   playerPass: '1',
 };
-const allPlayers = [player1];
+const allUsers = [];
 
+// Functions
 const openOverlay = function () {
-  overlay.classList.remove('hidden');
+  modalOverlay.classList.remove('hidden');
 };
-const loggingIn = function () {
-  let currentUser = loginInput.value;
-};
+
 const closeOverlay = function () {
-  overlay.classList.add('hidden');
+  modalOverlay.classList.add('hidden');
 };
-closeOverlayButton.addEventListener('click', closeOverlay);
 
-logInBtn.addEventListener('click', openOverlay);
+const greetingUser = function () {
+  const greeting = document.createElement('h2');
+  greeting.classList.add('home-container');
+  greeting.textContent = `Hello ${player1.playerName}!`;
+  header.prepend(greeting);
+  closeOverlay();
+};
 
-overlay.addEventListener('click', function (e) {
-  if (e.target === overlay) closeOverlay();
+// Event Listeners
+closeOverlayBtn.addEventListener('click', closeOverlay);
+
+enterBtn.addEventListener('click', openOverlay);
+
+modalOverlay.addEventListener('click', function (e) {
+  if (e.target === modalOverlay) closeOverlay();
 });
-logInPlayer.addEventListener('click', () => {
+
+logInPlayerBtn.addEventListener('click', () => {
   if (
     loginInput.value === player1.playerName &&
-    loginPass.value === player1.playerPass
+    passwordInput.value === player1.playerPass
   ) {
-    const greeting = document.createElement('h2');
-    greeting.classList.add('home-container');
-    greeting.textContent = `Hello ${player1.playerName}!`;
-    header.prepend(greeting);
-    closeOverlay();
+    greetingUser();
   } else {
     const errorMessage = document.createElement('p');
     errorMessage.classList.add('error-message');
     errorMessage.textContent = 'Будь ласка впишіть парвильний логін і пароль';
     errorMessage.style.backgroundColor = 'red';
-    modal.style.backgroundColor = 'lightcoral';
-    modal.insertBefore(errorMessage, modal.firstChild);
+    modalLogInWindow.style.backgroundColor = 'lightcoral';
+    modalLogInWindow.insertBefore(errorMessage, modalLogInWindow.firstChild);
     setTimeout(() => {
-      modal.style.backgroundColor = '';
-      modal.removeChild(errorMessage);
+      modalLogInWindow.style.backgroundColor = '';
+      modalLogInWindow.removeChild(errorMessage);
     }, 3000);
   }
 });
-
-// const Player = function (playerName, playerPass) {
-//   this.playerName = playerName;
-//   this.playerPass = playerPass;
-// };
+// Реєстрація
+signInBtn.addEventListener('click', function () {
+  const newUserIndex = allUsers.length + 1;
+  const newUserName = `newUser${newUserIndex}`;
+  // const newUserName = loginInput.value;
+  const newUserPassword = passwordInput.value;
+  if (!loginInput.value || !passwordInput.value) {
+    console.log('Будь ласка, заповніть всі поля.');
+  } else {
+    const isNameTaken = allUsers.some(player => player.name === newUserName);
+    if (isNameTaken) {
+      console.log("Це ім'я вже зайняте.");
+    } else {
+      const newUser = {
+        name: newUserName,
+        password: passwordInput.value,
+      };
+      allUsers.push(newUser);
+      console.log('User registered:', newUser);
+      console.log(allUsers);
+      greetingUser();
+    }
+  }
+});

@@ -115,11 +115,11 @@ h1:hover {
 
 .container_ul li {
     padding: .5rem;
-    height: 80%;
+    height: 60%;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1;
+    flex: 0.3;
     background: linear-gradient(135deg, rgba(var(--primary-white), 0.2), var(--primary-green), rgba(var(--primary-white), 0.2));
     border-radius: var(--border-m);
     border: none;
