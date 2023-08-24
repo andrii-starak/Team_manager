@@ -4,6 +4,7 @@ const modalOverlay = document.querySelector('#modalOverlay');
 const modalLogInWindow = document.querySelector('#modalLogInWindow');
 // Buttons
 const enterBtn = document.querySelector('#enterBtn');
+const exitBtn = document.querySelector('#exitBtn');
 const logInPlayerBtn = document.querySelector('#logInPlayerBtn');
 const signInBtn = document.querySelector('#signInBtn');
 const closeOverlayBtn = document.querySelector('#closeOverlayBtn');
@@ -11,13 +12,25 @@ const closeOverlayBtn = document.querySelector('#closeOverlayBtn');
 const loginInput = document.querySelector('#loginInput');
 const passwordInput = document.querySelector('#passwordInput');
 // Logic
-const player1 = {
-  playerName: 'Andrii',
-  playerPass: '1',
-};
-const allUsers = [];
+// const player1 = {
+//   playerName: 'Andrii',
+//   playerPass: '1',
+// };
+const allUsers = [
+  {
+    name: 'Andrii',
+    password: '1',
+    id: 1,
+  },
+];
+let currentPlayer;
+
+if (!currentPlayer) exitBtn.disabled = true;
 
 // Functions
+const defineCurrentUser = function (user) {
+  currentPlayer = user;
+};
 const openOverlay = function () {
   modalOverlay.classList.remove('hidden');
 };
@@ -26,29 +39,51 @@ const closeOverlay = function () {
   modalOverlay.classList.add('hidden');
 };
 
-const greetingUser = function () {
+const greetingUser = function (userName) {
   const greeting = document.createElement('h2');
   greeting.classList.add('home-container');
-  greeting.textContent = `Hello ${player1.playerName}!`;
+  greeting.textContent = `Hello ${userName}!`;
+  greeting.id = 'greeting';
   header.prepend(greeting);
   closeOverlay();
+};
+
+const exitUser = function () {
+  const greetingEl = document.querySelector('#greeting');
+  currentPlayer = null;
+  if (greetingEl) {
+    greetingEl.remove();
+  }
+  enterBtn.disabled = false;
+  exitBtn.disabled = true;
 };
 
 // Event Listeners
 closeOverlayBtn.addEventListener('click', closeOverlay);
 
 enterBtn.addEventListener('click', openOverlay);
+exitBtn.addEventListener('click', exitUser);
 
+// Сховати вікно входу
 modalOverlay.addEventListener('click', function (e) {
   if (e.target === modalOverlay) closeOverlay();
 });
 
+// Вхід
 logInPlayerBtn.addEventListener('click', () => {
-  if (
-    loginInput.value === player1.playerName &&
-    passwordInput.value === player1.playerPass
-  ) {
-    greetingUser();
+  const isRegistered = allUsers.some(
+    player =>
+      player.name === loginInput.value &&
+      player.password === passwordInput.value,
+  );
+
+  if (isRegistered) {
+    console.log('вже зареєстрований');
+    const userNameToFind = loginInput.value;
+    const foundUser = allUsers.find(user => user.name === userNameToFind);
+    greetingUser(foundUser.name);
+    enterBtn.disabled = true;
+    exitBtn.disabled = false;
   } else {
     const errorMessage = document.createElement('p');
     errorMessage.classList.add('error-message');
@@ -64,25 +99,34 @@ logInPlayerBtn.addEventListener('click', () => {
 });
 // Реєстрація
 signInBtn.addEventListener('click', function () {
-  const newUserIndex = allUsers.length + 1;
-  const newUserName = `newUser${newUserIndex}`;
-  // const newUserName = loginInput.value;
+  const newUserName = loginInput.value;
   const newUserPassword = passwordInput.value;
+  const newUserIndex = allUsers.length + 1;
+
   if (!loginInput.value || !passwordInput.value) {
-    console.log('Будь ласка, заповніть всі поля.');
+    alert('Будь ласка, заповніть всі поля.');
   } else {
     const isNameTaken = allUsers.some(player => player.name === newUserName);
     if (isNameTaken) {
-      console.log("Це ім'я вже зайняте.");
+      alert("Це ім'я вже зайняте.");
     } else {
       const newUser = {
         name: newUserName,
         password: passwordInput.value,
+        id: newUserIndex,
       };
       allUsers.push(newUser);
       console.log('User registered:', newUser);
       console.log(allUsers);
-      greetingUser();
+      greetingUser(newUser.name);
+      currentPlayer = newUser;
+      loginInput.value = '';
+      passwordInput.value = '';
+      defineCurrentUser(newUser);
+      enterBtn.disabled = true;
+      exitBtn.disabled = false;
+
+      console.log(newUser);
     }
   }
 });
