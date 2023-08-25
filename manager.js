@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const users = [];
   let playerAddedStatus = false;
   // Logic
+
+  import { allUsers } from './script';
   //
   deletePlayerButton.disabled = true;
 
@@ -26,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const addingPlayer = function () {
     let playerName = inputPlayerName.value;
-    if (!playerName || users.length > 14) return;
+    if (!playerName || users.length > 15) return;
     else {
       deletePlayerButton.disabled = false;
 

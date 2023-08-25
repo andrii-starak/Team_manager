@@ -11,12 +11,8 @@ const closeOverlayBtn = document.querySelector('#closeOverlayBtn');
 // Inputs
 const loginInput = document.querySelector('#loginInput');
 const passwordInput = document.querySelector('#passwordInput');
-// Logic
-// const player1 = {
-//   playerName: 'Andrii',
-//   playerPass: '1',
-// };
-const allUsers = [
+
+export const allUsers = [
   {
     name: 'Andrii',
     password: '1',
@@ -25,10 +21,14 @@ const allUsers = [
 ];
 let currentPlayer;
 
+// export
+
+// Logic
+
 if (!currentPlayer) exitBtn.disabled = true;
 
 // Functions
-const defineCurrentUser = function (user) {
+const defineCurrentPlayer = function (user) {
   currentPlayer = user;
 };
 const openOverlay = function () {
@@ -58,6 +58,10 @@ const exitUser = function () {
   exitBtn.disabled = true;
 };
 
+const clearInputs = function () {
+  loginInput.value = '';
+  passwordInput.value = '';
+};
 // Event Listeners
 closeOverlayBtn.addEventListener('click', closeOverlay);
 
@@ -71,19 +75,29 @@ modalOverlay.addEventListener('click', function (e) {
 
 // Вхід
 logInPlayerBtn.addEventListener('click', () => {
+  const userNameToFind = loginInput.value;
+  const passwordToCheck = passwordInput.value;
+
+  if (!userNameToFind || !passwordToCheck) {
+    console.log('Будь ласка, заповніть всі поля.');
+    return;
+  }
   const isRegistered = allUsers.some(
     player =>
       player.name === loginInput.value &&
       player.password === passwordInput.value,
   );
 
+  const foundUser = allUsers.find(user => user.name === userNameToFind);
+
   if (isRegistered) {
-    console.log('вже зареєстрований');
-    const userNameToFind = loginInput.value;
-    const foundUser = allUsers.find(user => user.name === userNameToFind);
+    console.log('Ви успішно увійшли');
     greetingUser(foundUser.name);
     enterBtn.disabled = true;
     exitBtn.disabled = false;
+    clearInputs();
+    defineCurrentPlayer(foundUser);
+    console.log(currentPlayer);
   } else {
     const errorMessage = document.createElement('p');
     errorMessage.classList.add('error-message');
@@ -105,28 +119,28 @@ signInBtn.addEventListener('click', function () {
 
   if (!loginInput.value || !passwordInput.value) {
     alert('Будь ласка, заповніть всі поля.');
-  } else {
-    const isNameTaken = allUsers.some(player => player.name === newUserName);
-    if (isNameTaken) {
-      alert("Це ім'я вже зайняте.");
-    } else {
-      const newUser = {
-        name: newUserName,
-        password: passwordInput.value,
-        id: newUserIndex,
-      };
-      allUsers.push(newUser);
-      console.log('User registered:', newUser);
-      console.log(allUsers);
-      greetingUser(newUser.name);
-      currentPlayer = newUser;
-      loginInput.value = '';
-      passwordInput.value = '';
-      defineCurrentUser(newUser);
-      enterBtn.disabled = true;
-      exitBtn.disabled = false;
-
-      console.log(newUser);
-    }
+    return;
   }
+
+  const isNameTaken = allUsers.some(player => player.name === newUserName);
+  if (isNameTaken) {
+    alert("Це ім'я вже зайняте.");
+    return;
+  }
+
+  const newUser = {
+    name: newUserName,
+    password: passwordInput.value,
+    id: newUserIndex,
+  };
+
+  allUsers.push(newUser);
+  console.log('User registered:', newUser);
+  console.log(allUsers);
+  greetingUser(newUser.name);
+  clearInputs();
+  defineCurrentPlayer(newUser);
+  console.log(`CurrentUser is ${currentPlayer.name}`);
+  enterBtn.disabled = true;
+  exitBtn.disabled = false;
 });
