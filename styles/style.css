@@ -38,7 +38,6 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font
 }
 
 
@@ -53,12 +52,15 @@ body {
 }
 
 .container {
-    width: 70%;
+    /* width: 70%; */
     max-width: 1200px;
 }
 
 header {
     display: flex;
+    position: fixed;
+    top: 3rem;
+    left: 15%;
     justify-content: space-around;
     align-items: center;
     height: 100px;
@@ -204,19 +206,22 @@ h1:hover {
 
 .manager {}
 
-.photo {}
-
-.calendar {}
-
 .suggestion {}
 
 footer {
+    position: fixed;
+    bottom: 3rem;
+    width: ;
+}
+
+.footer_container {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     height: 5rem;
     background-image: url(/picures/footer/stock-photo-panoramic-shot-green-grass-meadow.jfif);
-    filter: drop-shadow(0px 0px 7px var(--primary-green));
+    filter: drop-shadow(0px 0px 4px var(--primary-green));
+    ;
 }
 
 h3 {
@@ -225,7 +230,7 @@ h3 {
 
 .footer_info {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .footer_info li {

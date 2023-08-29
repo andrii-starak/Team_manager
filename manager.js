@@ -1,18 +1,15 @@
-'use strict';
+import { allUsers, currentPlayer } from './script.js';
 document.addEventListener('DOMContentLoaded', () => {
   const addPlayerButton = document.querySelector('.add_player');
   const addGuestButton = document.querySelector('.add_guest');
   const deletePlayerButton = document.querySelector('.delete_guest');
   const playerTable = document.querySelector('.player_table');
   const inputPlayerName = document.querySelector('#player-name');
-  const users = [];
-  let playerAddedStatus = false;
-  // Logic
 
-  import { allUsers } from './script';
   //
   deletePlayerButton.disabled = true;
 
+  // Functions
   const capitalizer = function (string) {
     const words = string
       .split(' ')
@@ -22,28 +19,36 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const disabler = function () {
-    addPlayerButton.disabled = true;
     deletePlayerButton.disabled = false;
+  };
+
+  const addingCurrentUser = function (currentPlayer) {
+    if (allUsers.length > 15) return;
+    else {
+      deletePlayerButton.disabled = false;
+      const createdPlayerRow = document.createElement('p');
+      createdPlayerRow.textContent = `${allUsers.length}. ${currentPlayer.name}`;
+      playerTable.append(createdPlayerRow);
+      inputPlayerName.value = '';
+      disabler();
+      addPlayerButton.disabled = true;
+    }
   };
 
   const addingPlayer = function () {
     let playerName = inputPlayerName.value;
-    if (!playerName || users.length > 15) return;
+    if (!playerName || allUsers.length > 15) return;
     else {
       deletePlayerButton.disabled = false;
 
       playerName = capitalizer(playerName);
       console.log(playerName);
-      users.push(playerName);
+      allUsers.push(playerName);
       const createdPlayerRow = document.createElement('p');
-      createdPlayerRow.textContent = `${users.length}. ${playerName}`;
+      createdPlayerRow.textContent = `${allUsers.length}. ${playerName}`;
       playerTable.append(createdPlayerRow);
       inputPlayerName.value = '';
       disabler();
-      if (users.length == 3) {
-        disabler();
-        addGuestButton.disabled = true;
-      }
     }
   };
 
@@ -51,15 +56,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const lastElementTable = playerTable.lastElementChild;
     lastElementTable.remove();
     addPlayerButton.disabled = false;
-    users.pop();
+    allUsers.pop();
   };
 
   const addingGuest = function () {
     addingPlayer();
   };
 
+  // Event Listeners
+
   addPlayerButton.addEventListener('click', () => {
-    addingPlayer();
+    addingCurrentUser(currentPlayer);
   });
 
   deletePlayerButton.addEventListener('click', () => deletingPlayer());
@@ -68,5 +75,4 @@ document.addEventListener('DOMContentLoaded', () => {
     addingGuest();
   });
 });
-
-// sign in module
+// Open Team
