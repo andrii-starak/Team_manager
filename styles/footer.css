@@ -1,0 +1,35 @@
+footer {
+    /* position: fixed; */
+    bottom: 3rem;
+    /* width: ; */
+}
+
+.footer_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 6rem;
+    background-image: url(/picures/footer/stock-photo-panoramic-shot-green-grass-meadow.jfif);
+    filter: drop-shadow(0px 0px 4px var(--primary-green));
+    padding: 1rem;
+}
+
+h3 {
+    text-align: center;
+}
+
+.footer_info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer_info li {
+    background-color: rgb(var(--primary-white), .4);
+    border-radius: 5px;
+    transition: all .3s ease;
+}
+
+.footer_info li:hover {
+    filter: drop-shadow(0px 0px 10px var(--secondary-red));
+    background: linear-gradient(45deg, var(--primary-red), var(--secondary-red), var(--primary-red));
+}
