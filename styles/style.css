@@ -47,7 +47,7 @@ body {
     justify-content: center;
     align-items: center;
     background: linear-gradient(135deg, var(--primary-blue), var(--secondary-red));
-    background-image: url(/picures/body/pexels-photo-3448250.jpeg);
+    background-image: url(/images/body/pexels-photo-3448250.jpeg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }

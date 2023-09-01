@@ -18,46 +18,52 @@
 <body>
     <div id="homeContainer" class="container">
         <header id="home">
-            <a class="logo" href="#home"><img src="/picures/logo/6_549695108044292128_3_inv.svg" width="100"
-                    height="100" alt="site_logo"></a>
+            <a class="logo" href="#home"><img src="/images/logo/6_549695108044292128_3_inv.svg" width="100" height="100"
+                    alt="site_logo"></a>
             <h1>Team manager</h1>
             <div class="container_nav">
                 <div class="container_ul">
-                    <button id="enterBtn">Вхід/Реєстрація</button>
-                    <button id="exitBtn">Вихід</button>
+                    <button class="main-button" id="enterBtn">Вхід/Реєстрація</button>
+                    <button class="main-button" id="exitBtn">Вихід</button>
                 </div>
             </div>
         </header>
+        <!-- main menu -->
         <main class="container">
             <div class="container_main" id="optionsMenu">
                 <div class="main_content manager" id="optionsMenuTeam">
                     <a class="main_content--link" href="#">
-                        <img class="main_content--img" src="/picures/main/ball.jpg" alt="ball_on_grass">
+                        <img class="main_content--img" src="/images/main/ball.jpg" alt="ball_on_grass">
                         <p class="main_content--text">Команди</p>
                     </a>
                 </div>
                 <div class="main_content photo" id="optionsMenuSuggestions">
                     <a class="main_content--link" href="#">
-                        <img class="main_content--img" src="/picures/main/ball.jpg" alt="ball_on_grass">
+                        <img class="main_content--img" src="/images/main/ball.jpg" alt="ball_on_grass">
                         <p class="main_content--text">Пропозиції</p>
                     </a>
                 </div>
             </div>
+            <!-- manager -->
             <div class="container hidden" id="managerMenu">
                 <div class="player_input">
                     <div class="input--header">
                         <label for="player-name">Гравець</label>
                         <input class="input--header-left player-name" type="text" id="player-name" name="player-name"
                             minlength="1" maxlength="30" size="10" placeholder="Прізвище - імя">
-                        <button class="add add_player input--header-center" type="submit">Взяти участь</button>
-                        <button class="add add_guest input--header-center" type="submit">Додати гостя</button>
-                        <button class="add delete_guest input--header-center" type="submit">Відмінити голос</button>
+                        <button class="add add_player main-button  input--header-center" type="submit">Взяти
+                            участь</button>
+                        <button class="add add_guest main-button  input--header-center" type="submit">Додати
+                            гостя</button>
+                        <button class="add delete_guest  main-button input--header-center" type="submit">Відмінити
+                            голос</button>
                     </div>
                     <hr>
                     <div class="player_table">
                     </div>
                 </div>
             </div>
+            <!-- log in overlay -->
             <div class="modal-overlay hidden" id="modalOverlay">
                 <div class="modal" id="modalLogInWindow">
                     <label for="login" class="input-label">Логін</label>

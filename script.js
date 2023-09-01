@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
       exitBtn.disabled = false;
       clearInputs();
       defineCurrentPlayer(foundUser);
-      console.log(currentPlayer);
+      console.log(`Поточний гравець ${currentPlayer.name}`);
     } else {
       const errorMessage = document.createElement('p');
       errorMessage.classList.add('error-message');
