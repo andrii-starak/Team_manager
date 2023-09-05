@@ -6,8 +6,12 @@ export const allUsers = [
     id: 1,
   },
 ];
-export let currentPlayer;
-
+export let currentPlayer = {
+  name: 'Andrii',
+  password: '1',
+  id: 1,
+};
+export const participants = [];
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('#homeContainer');
   // const header = document.querySelector('#home');

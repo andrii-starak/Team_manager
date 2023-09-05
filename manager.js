@@ -1,4 +1,4 @@
-import { allUsers, currentPlayer } from './script.js';
+import { allUsers, currentPlayer, participants } from './script.js';
 document.addEventListener('DOMContentLoaded', () => {
   const addPlayerButton = document.querySelector('.add_player');
   const addGuestButton = document.querySelector('.add_guest');
@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //
   deletePlayerButton.disabled = true;
-
   // Functions
   const capitalizer = function (string) {
     const words = string
@@ -23,15 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const addingCurrentUser = function (currentPlayer) {
-    if (allUsers.length > 15) return;
+    if (participants.length > 15) return;
     else {
       deletePlayerButton.disabled = false;
+      participants.push(currentPlayer);
       const createdPlayerRow = document.createElement('p');
-      createdPlayerRow.textContent = `${allUsers.length}. ${currentPlayer.name}`;
+      createdPlayerRow.textContent = `${participants.length}. ${currentPlayer.name}`;
       playerTable.append(createdPlayerRow);
       inputPlayerName.value = '';
       disabler();
       addPlayerButton.disabled = true;
+      console.log(participants);
     }
   };
   const deletePlayer = function () {};
@@ -40,28 +41,31 @@ document.addEventListener('DOMContentLoaded', () => {
     let playerName = inputPlayerName.value;
     if (!playerName || allUsers.length > 15) return;
     else {
-      deletePlayerButton.disabled = false;
+      const newParticipantName = inputPlayerName.value;
+      const newParticipantIndex = Number(
+        `${currentPlayer.id}${participants.length}`,
+      );
+      const newParticipant = {
+        name: newParticipantName,
+        id: newParticipantIndex,
+      };
 
+      deletePlayerButton.disabled = false;
       playerName = capitalizer(playerName);
       console.log(playerName);
-
       allUsers.push(playerName);
-
-      // const createdPlayerRow = document.createElement('p');
-      // createdPlayerRow.textContent = `${allUsers.length}. ${playerName}`;
-      // playerTable.append(createdPlayerRow);
+      participants.push(newParticipant);
+      console.log(newParticipant);
 
       // Створюємо рядок для відображення гравця
       const playerRow = document.createElement('div');
       playerRow.classList.add('player-row');
 
+      participants.push(newParticipant);
+      playerRow.setAttribute('data-id', newParticipantIndex);
       // Додаємо порядковий номер
       const playerNumber = document.createElement('span');
       playerNumber.textContent = `${allUsers.length + 1}. `;
-
-      // Додаємо айдішку для рядка
-      // playerRow.id = `${currentPlayer.id}+${playerNumber.textContent}`;
-
       // Додаємо ім'я гравця
       const playerNameElement = document.createElement('span');
       playerNameElement.textContent = playerName;
@@ -108,9 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
   addPlayerButton.addEventListener('click', () => {
     addingCurrentUser(currentPlayer);
   });
-
   deletePlayerButton.addEventListener('click', () => deletingPlayer());
-
   addGuestButton.addEventListener('click', () => {
     addingGuest();
   });
