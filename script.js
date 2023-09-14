@@ -11,7 +11,9 @@ export let currentPlayer = {
   password: '1',
   id: 1,
 };
+
 export const participants = [];
+
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('#homeContainer');
   // const header = document.querySelector('#home');

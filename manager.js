@@ -32,14 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
       inputPlayerName.value = '';
       disabler();
       addPlayerButton.disabled = true;
-      console.log(participants);
+      console.log('Participants:', participants);
     }
   };
+
   const deletePlayer = function () {};
 
   const addingPlayer = function () {
     let playerName = inputPlayerName.value;
-    if (!playerName || allUsers.length > 15) return;
+    if (!playerName || participants.length > 15) return;
     else {
       const newParticipantName = inputPlayerName.value;
       const newParticipantIndex = Number(
@@ -52,10 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       deletePlayerButton.disabled = false;
       playerName = capitalizer(playerName);
-      console.log(playerName);
+      // console.log(playerName);
       allUsers.push(playerName);
-      participants.push(newParticipant);
-      console.log(newParticipant);
+
+      console.log('Participants BEFORE delete:', participants);
 
       // Створюємо рядок для відображення гравця
       const playerRow = document.createElement('div');
@@ -80,7 +81,22 @@ document.addEventListener('DOMContentLoaded', () => {
       deleteIcon.alt = 'Видалити';
       deleteButton.appendChild(deleteIcon);
 
-      deleteButton.addEventListener('click', function () {});
+      deleteButton.addEventListener('click', function () {
+        const playerId = playerRow.getAttribute('data-id');
+        const playerIndex = participants.findIndex(
+          someParticipent => someParticipent.id == playerId,
+        );
+        console.log('------delete button was clicked-----');
+        // Перевіряємо, чи гравця знайдено в масиві
+        if (playerIndex !== -1) {
+          // Видаляємо гравця з масиву participants
+          participants.splice(playerIndex, 1);
+          // Видаляємо рядок гравця з DOM
+          playerRow.remove();
+          console.log('Participants AFTER delete:', participants);
+          console.log('newParticipant:', newParticipant);
+        }
+      });
 
       // Додаємо всі елементи до рядка
       playerRow.appendChild(playerNumber);
@@ -90,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Додаємо рядок до таблиці або контейнера, де ви хочете відображати гравців
       playerTable.appendChild(playerRow);
 
-      inputPlayerName.value = '';
+      // inputPlayerName.value = '';
       disabler();
     }
   };
