@@ -17,26 +17,36 @@ document.addEventListener('DOMContentLoaded', () => {
     return capitalizedString;
   };
 
-  const disabler = function () {
-    deletePlayerButton.disabled = false;
-  };
+  // const disabler = function () {
+  //   deletePlayerButton.disabled = false;
+  // };
 
   const addingCurrentUser = function (currentPlayer) {
     if (participants.length > 15) return;
     else {
-      deletePlayerButton.disabled = false;
+      console.log(currentPlayer);
       participants.push(currentPlayer);
-      const createdPlayerRow = document.createElement('p');
-      createdPlayerRow.textContent = `${participants.length}. ${currentPlayer.name}`;
+
+      const createdPlayerRow = document.createElement('div');
+      createdPlayerRow.classList.add('player-row');
+
+      createdPlayerRow.setAttribute('data-id', currentPlayer.id);
+      // Додаємо порядковий номер
+      const playerNumber = document.createElement('span');
+      playerNumber.textContent = `${participants.length}. `;
+      // Додаємо ім'я гравця
+      const playerNameElement = document.createElement('span');
+      playerNameElement.textContent = currentPlayer.name;
+
       playerTable.append(createdPlayerRow);
+      createdPlayerRow.appendChild(playerNumber);
+      createdPlayerRow.appendChild(playerNameElement);
+
       inputPlayerName.value = '';
-      disabler();
+      deletePlayerButton.disabled = false;
       addPlayerButton.disabled = true;
-      console.log('Participants:', participants);
     }
   };
-
-  const deletePlayer = function () {};
 
   const addingPlayer = function () {
     let playerName = inputPlayerName.value;
@@ -51,10 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         id: newParticipantIndex,
       };
 
-      deletePlayerButton.disabled = false;
       playerName = capitalizer(playerName);
-      // console.log(playerName);
-      allUsers.push(playerName);
 
       console.log('Participants BEFORE delete:', participants);
 
@@ -66,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
       playerRow.setAttribute('data-id', newParticipantIndex);
       // Додаємо порядковий номер
       const playerNumber = document.createElement('span');
-      playerNumber.textContent = `${allUsers.length + 1}. `;
+      playerNumber.textContent = `${participants.length}. `;
       // Додаємо ім'я гравця
       const playerNameElement = document.createElement('span');
       playerNameElement.textContent = playerName;
@@ -93,8 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
           participants.splice(playerIndex, 1);
           // Видаляємо рядок гравця з DOM
           playerRow.remove();
-          console.log('Participants AFTER delete:', participants);
-          console.log('newParticipant:', newParticipant);
+          console.log('Participants:', participants);
         }
       });
 
@@ -105,17 +111,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Додаємо рядок до таблиці або контейнера, де ви хочете відображати гравців
       playerTable.appendChild(playerRow);
-
-      // inputPlayerName.value = '';
-      disabler();
+      inputPlayerName.value = '';
     }
   };
 
   const deletingPlayer = function () {
-    const lastElementTable = playerTable.lastElementChild;
-    lastElementTable.remove();
-    addPlayerButton.disabled = false;
-    allUsers.pop();
+    // const lastElementTable = playerTable.lastElementChild;
+    // lastElementTable.remove();
+    // addPlayerButton.disabled = false;
+    // allUsers.pop();
   };
 
   const addingGuest = function () {
