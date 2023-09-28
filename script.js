@@ -36,8 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Logic
 
-  if (!currentPlayer) exitBtn.disabled = true;
-
   // Functions
   const defineCurrentPlayer = function (user) {
     currentPlayer = user;
@@ -61,12 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const exitUser = function () {
     const greetingEl = document.querySelector('#greeting');
-    currentPlayer = null;
-    if (greetingEl) {
+    if (!currentPlayer) return;
+    else {
+      currentPlayer = null;
       greetingEl.remove();
+      enterBtn.disabled = false;
+      exitBtn.disabled = true;
     }
-    enterBtn.disabled = false;
-    exitBtn.disabled = true;
   };
 
   const clearInputs = function () {

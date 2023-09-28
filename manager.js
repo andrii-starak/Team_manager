@@ -17,10 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return capitalizedString;
   };
 
-  // const disabler = function () {
-  //   deletePlayerButton.disabled = false;
-  // };
-
+  //----------------------------------поточного гравця додати
   const addingCurrentUser = function (currentPlayer) {
     if (participants.length > 15) return;
     else {
@@ -29,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const createdPlayerRow = document.createElement('div');
       createdPlayerRow.classList.add('player-row');
+      createdPlayerRow.classList.add('current-player-row');
 
       createdPlayerRow.setAttribute('data-id', currentPlayer.id);
       // Додаємо порядковий номер
@@ -38,17 +36,41 @@ document.addEventListener('DOMContentLoaded', () => {
       const playerNameElement = document.createElement('span');
       playerNameElement.textContent = currentPlayer.name;
 
+      const deleteButton = document.createElement('button');
+      deleteButton.classList.add('delete-button');
+      deleteButton.classList.add('hidden');
+
+      const deleteIcon = document.createElement('img');
+      deleteIcon.src = '/images/icons/cross-mark-svgrepo-com.svg';
+      deleteIcon.width = 12;
+      deleteIcon.height = 12;
+      deleteIcon.alt = 'Видалити';
+      deleteButton.appendChild(deleteIcon);
+      // ---------------------
       playerTable.append(createdPlayerRow);
       createdPlayerRow.appendChild(playerNumber);
       createdPlayerRow.appendChild(playerNameElement);
+      createdPlayerRow.appendChild(deleteButton);
 
       inputPlayerName.value = '';
       deletePlayerButton.disabled = false;
       addPlayerButton.disabled = true;
+
+      deleteButton.addEventListener('click', function () {
+        const playerIndex = participants.findIndex(
+          someParticipent => someParticipent.id == currentPlayer.id,
+        );
+        if (playerIndex !== -1) {
+          participants.splice(playerIndex, 1);
+          document.querySelector('.current-player-row').remove();
+        }
+        addPlayerButton.disabled = false;
+        console.log(participants);
+      });
     }
   };
-
-  const addingPlayer = function () {
+  // -----------------------------------------------------
+  const addingGuest = function () {
     let playerName = inputPlayerName.value;
     if (!playerName || participants.length > 15) return;
     else {
@@ -81,6 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Додаємо кнопку для видалення гравця
       const deleteButton = document.createElement('button');
       deleteButton.classList.add('delete-button');
+      deleteButton.classList.add('hidden');
+
       const deleteIcon = document.createElement('img');
       deleteIcon.src = '/images/icons/cross-mark-svgrepo-com.svg';
       deleteIcon.width = 12;
@@ -116,14 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const deletingPlayer = function () {
-    // const lastElementTable = playerTable.lastElementChild;
-    // lastElementTable.remove();
-    // addPlayerButton.disabled = false;
-    // allUsers.pop();
-  };
-
-  const addingGuest = function () {
-    addingPlayer();
+    const deleteButtons = document.querySelectorAll('.delete-button');
+    deleteButtons.forEach(button => {
+      button.classList.remove('hidden');
+    });
   };
 
   //

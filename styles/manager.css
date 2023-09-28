@@ -72,7 +72,12 @@ button:active {
 }
 
 button:disabled {
-    background-color: #ff3333;
+    background-color: #dfdfdf;
+    color: #7d7d7d;
+}
+
+button:disabled:active {
+    top: 0;
 }
 
 label {
