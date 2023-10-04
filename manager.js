@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const deletePlayerButton = document.querySelector('.delete_guest');
   const playerTable = document.querySelector('.player_table');
   const inputPlayerName = document.querySelector('#player-name');
-
+  const numberOfPlayers = document.querySelector('.counter-number');
   //
   deletePlayerButton.disabled = true;
   // Functions
@@ -17,6 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
     return capitalizedString;
   };
 
+  const addToCounter = function () {
+    let numberOfPlayersValue = parseInt(numberOfPlayers.textContent, 10);
+    numberOfPlayersValue++;
+    numberOfPlayers.textContent = numberOfPlayersValue;
+  };
+  const reduceCounter = function () {
+    let numberOfPlayersValue = parseInt(numberOfPlayers.textContent, 10);
+    numberOfPlayersValue--;
+    numberOfPlayers.textContent = numberOfPlayersValue;
+  };
   //----------------------------------поточного гравця додати
   const addingCurrentUser = function (currentPlayer) {
     if (participants.length > 15) return;
@@ -30,8 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       createdPlayerRow.setAttribute('data-id', currentPlayer.id);
       // Додаємо порядковий номер
-      const playerNumber = document.createElement('span');
-      playerNumber.textContent = `${participants.length}. `;
+      // const playerNumber = document.createElement('span');
+      // playerNumber.textContent = `${participants.length}. `;
       // Додаємо ім'я гравця
       const playerNameElement = document.createElement('span');
       playerNameElement.textContent = currentPlayer.name;
@@ -48,15 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
       deleteButton.appendChild(deleteIcon);
       // ---------------------
       playerTable.append(createdPlayerRow);
-      createdPlayerRow.appendChild(playerNumber);
+      // createdPlayerRow.appendChild(playerNumber);
       createdPlayerRow.appendChild(playerNameElement);
       createdPlayerRow.appendChild(deleteButton);
 
       inputPlayerName.value = '';
       deletePlayerButton.disabled = false;
       addPlayerButton.disabled = true;
-
+      addToCounter();
       deleteButton.addEventListener('click', function () {
+        reduceCounter();
         const playerIndex = participants.findIndex(
           someParticipent => someParticipent.id == currentPlayer.id,
         );
@@ -82,24 +93,18 @@ document.addEventListener('DOMContentLoaded', () => {
         name: newParticipantName,
         id: newParticipantIndex,
       };
-
       playerName = capitalizer(playerName);
-
-      console.log('Participants BEFORE delete:', participants);
-
       // Створюємо рядок для відображення гравця
       const playerRow = document.createElement('div');
       playerRow.classList.add('player-row');
-
       participants.push(newParticipant);
       playerRow.setAttribute('data-id', newParticipantIndex);
       // Додаємо порядковий номер
-      const playerNumber = document.createElement('span');
-      playerNumber.textContent = `${participants.length}. `;
-      // Додаємо ім'я гравця
+      // const playerNumber = document.createElement('span');
+      // playerNumber.textContent = `${participants.length}. `;
       const playerNameElement = document.createElement('span');
       playerNameElement.textContent = playerName;
-
+      addToCounter();
       // Додаємо кнопку для видалення гравця
       const deleteButton = document.createElement('button');
       deleteButton.classList.add('delete-button');
@@ -112,7 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
       deleteIcon.alt = 'Видалити';
       deleteButton.appendChild(deleteIcon);
 
+      // подія для видалення гравця
       deleteButton.addEventListener('click', function () {
+        reduceCounter();
+
         const playerId = playerRow.getAttribute('data-id');
         const playerIndex = participants.findIndex(
           someParticipent => someParticipent.id == playerId,
@@ -129,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       // Додаємо всі елементи до рядка
-      playerRow.appendChild(playerNumber);
+      // playerRow.appendChild(playerNumber);
       playerRow.appendChild(playerNameElement);
       playerRow.appendChild(deleteButton);
 

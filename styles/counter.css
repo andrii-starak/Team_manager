@@ -1,0 +1,25 @@
+.player-counter {
+    margin: 0 auto;
+    margin-bottom: 1em;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.counter-text {
+    display: inline-block;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #000000;
+}
+
+.counter-number {
+    display: inline-block;
+    background-color: aliceblue;
+    padding: .3em .7em;
+    margin: 0em 1em;
+    border-radius: 7px;
+}

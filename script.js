@@ -159,5 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
     optionsMenu.classList.add('hidden');
     managerMenu.classList.remove('hidden');
   });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !modalOverlay.classList.contains('hidden')) {
+      closeOverlay();
+    }
+  });
   //
 });
